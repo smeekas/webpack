@@ -14,8 +14,9 @@ function App() {
   }, []);
   return (
     <div>
-      <img src={jsImg} alt="js" />
-      <img src={jsImg} alt="docker" />
+       <img src={jsImg} alt="js" />
+       <img src={jsImg} alt="docker" />
+
       <button type="button" className={styles.btn}>
         {btnLabel}
       </button>

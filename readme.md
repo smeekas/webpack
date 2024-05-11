@@ -138,3 +138,35 @@
     }),
   ];
   ```
+
+## FOR TYPESCRIPT
+
+install `@types/react`, `@types/react-dom`,`typescript`,`ts-loader`, <br/>
+
+```js
+// in webpack.config.js
+rules: [
+  {
+    test: /\.tsx?$/,
+    use: "ts-loader",
+    exclude: /node_modules/,
+  },
+];
+
+ entry: "./src/index.tsx",
+ // webpack don't know .tsx, .ts files so we have to tell webpack that there will be this kind of files
+resolve: { extensions: [".tsx", ".ts", ".jsx", ".js"] },
+```
+
+run command `npx tsc --init` to generate `tsconfig.json` file.
+
+If project contains css modules or importing of images, svgs etc.. then create `.d.ts` file with following content.
+
+```js
+//.d.ts file
+
+//we are telling ts that this kind of files will exists and we will import them
+declare module "*.module.css";
+declare module "*.png"
+declare module "*.jpeg"
+```

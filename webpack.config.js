@@ -5,11 +5,13 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
   output: {
     filename: "main.[name].[hash].js",
     path: path.resolve(__dirname, "dist"),
   },
+  // webpack don't know .tsx, .ts files so we have to tell webpack that there will be this kind of files
+  resolve: { extensions: [".tsx", ".ts", ".jsx", ".js"] },
   devServer: {
     hot: true,
     open: true,
@@ -17,6 +19,11 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
       {
         test: /\.m?[j]sx?$/,
         exclude: /node_modules/,
@@ -27,18 +34,6 @@ module.exports = {
           },
         },
       },
-      // {
-      //   test: /\.module\.css$/i,
-      //   use: [
-      //     "style-loader",
-      //     {
-      //       loader: "css-loader",
-      //       // options: {
-      //       //   modules: true,
-      //       // },
-      //     },
-      //   ],
-      // },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
