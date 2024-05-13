@@ -170,3 +170,41 @@ declare module "*.module.css";
 declare module "*.png"
 declare module "*.jpeg"
 ```
+
+Minimal tsconfig.json needed for react with typescript
+
+```js
+//tsconfig.json
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": [
+      //what type of typescript types we need.
+      //ex. if we develop app for server then we don't need dom
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "ESNext", //options: AMD,UMD, CJS,ESModule etc.. what to use in outputted js code.
+    "moduleResolution": "node",//moduleResolution determines the algorithm used for finding/resolving modules e.g. looking in node_modules or searching relative paths
+    "outDir": "dist",
+    "target": "ESNext", //convert js code to target js varient, e.g. es5, es2016 etc...
+    "sourceMap": true,//Enables the generation of sourcemap files. These files allow debuggers and other tools to display the original TypeScript source code when actually working with the emitted JavaScript files. Source map files are emitted as .js.map (or .jsx.map) files next to the corresponding .js output file.
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+     //Specifies an array of filenames or patterns to include in the program. These filenames are resolved relative to the directory containing the tsconfig.json file.
+     "src",
+  ],
+  "files": [
+    //Specifies an allowlist of files to include in the program. An error occurs if any of the files can’t be found.
+    "src/index.d.ts"
+    // putting .d.ts file in include is not working but putting that file in files array is working
+  ],
+  "exclude": [
+    //Specifies an array of filenames or patterns that should be skipped when resolving include.
+    "node_modules",
+    "dist"
+  ]
+}
+```
